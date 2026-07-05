@@ -1,0 +1,320 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══════════════════════════════════════
+         COLORS
+    ════════════════════════════════════════ -->
+    <SolidColorBrush x:Key="DarkNavyBrush"  Color="#1E2A3A"/>
+    <SolidColorBrush x:Key="RedBrush"       Color="#E74C3C"/>
+    <SolidColorBrush x:Key="DarkRedBrush"   Color="#C0392B"/>
+    <SolidColorBrush x:Key="BlueBrush"      Color="#2980B9"/>
+    <SolidColorBrush x:Key="GreenBrush"     Color="#27AE60"/>
+    <SolidColorBrush x:Key="OrangeBrush"    Color="#E67E22"/>
+    <SolidColorBrush x:Key="MutedTextBrush" Color="#888888"/>
+
+    <!-- ═══════════════════════════════════════
+         CARD STYLE
+    ════════════════════════════════════════ -->
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="Background"      Value="White"/>
+        <Setter Property="CornerRadius"    Value="8"/>
+        <Setter Property="Padding"         Value="16"/>
+        <Setter Property="BorderBrush"     Value="#E0E0E0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="8"
+                                  ShadowDepth="1"
+                                  Color="#CCCCCC"
+                                  Opacity="0.25"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         SIDEBAR COMBOBOX
+    ════════════════════════════════════════ -->
+    <Style x:Key="SidebarComboStyle" TargetType="ComboBox">
+        <Setter Property="Background"      Value="#2A3A4E"/>
+        <Setter Property="Foreground"      Value="Black"/>
+        <Setter Property="BorderBrush"     Value="#3E5068"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height"          Value="32"/>
+        <Setter Property="Margin"          Value="0,4,0,0"/>
+        <Setter Property="FontSize"        Value="12"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         SIDEBAR DATEPICKER
+    ════════════════════════════════════════ -->
+    <Style x:Key="SidebarDateStyle" TargetType="DatePicker">
+        <Setter Property="Background"      Value="#2A3A4E"/>
+        <Setter Property="Foreground"      Value="Black"/>
+        <Setter Property="BorderBrush"     Value="#3E5068"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height"          Value="32"/>
+        <Setter Property="Margin"          Value="0,4,0,0"/>
+        <Setter Property="FontSize"        Value="12"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         FILTER LABEL
+    ════════════════════════════════════════ -->
+    <Style x:Key="FilterLabelStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize"   Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin"     Value="0,12,0,0"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         APPLY BUTTON
+    ════════════════════════════════════════ -->
+    <Style x:Key="ApplyButtonStyle" TargetType="Button">
+        <Setter Property="Background"      Value="#E74C3C"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height"          Value="36"/>
+        <Setter Property="FontSize"        Value="12"/>
+        <Setter Property="FontWeight"      Value="SemiBold"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6" Padding="12,0">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#C0392B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         RESET BUTTON
+    ════════════════════════════════════════ -->
+    <Style x:Key="ResetButtonStyle" TargetType="Button">
+        <Setter Property="Background"      Value="Transparent"/>
+        <Setter Property="Foreground"      Value="Black"/>
+        <Setter Property="BorderBrush"     Value="#3E5068"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height"          Value="30"/>
+        <Setter Property="FontSize"        Value="11"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1" CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         EXPORT BUTTON
+    ════════════════════════════════════════ -->
+    <Style x:Key="ExportButtonStyle" TargetType="Button">
+        <Setter Property="Background"      Value="#27AE60"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height"          Value="30"/>
+        <Setter Property="FontSize"        Value="11"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         LOGIN BUTTON
+    ════════════════════════════════════════ -->
+    <Style x:Key="LoginButtonStyle" TargetType="Button">
+        <Setter Property="Background"      Value="#2980B9"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height"          Value="40"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="FontWeight"      Value="SemiBold"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#1F6897"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         DATAGRID ROW STYLE
+    ════════════════════════════════════════ -->
+    <Style x:Key="AlertRowStyle" TargetType="DataGridRow">
+        <Setter Property="Background" Value="White"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsHighRisk}" Value="True">
+                <Setter Property="Background" Value="#FFF0F0"/>
+                <Setter Property="Foreground" Value="#7B1C1C"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         STAT NUMBER STYLES
+    ════════════════════════════════════════ -->
+    <Style x:Key="StatNumberRed" TargetType="TextBlock">
+        <Setter Property="FontSize"   Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#E74C3C"/>
+        <Setter Property="Margin"     Value="0,4,0,0"/>
+    </Style>
+
+    <Style x:Key="StatNumberBlue" TargetType="TextBlock">
+        <Setter Property="FontSize"   Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#2980B9"/>
+        <Setter Property="Margin"     Value="0,4,0,0"/>
+    </Style>
+
+    <Style x:Key="StatNumberGreen" TargetType="TextBlock">
+        <Setter Property="FontSize"   Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#27AE60"/>
+        <Setter Property="Margin"     Value="0,4,0,0"/>
+    </Style>
+
+    <Style x:Key="StatNumberOrange" TargetType="TextBlock">
+        <Setter Property="FontSize"   Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#E67E22"/>
+        <Setter Property="Margin"     Value="0,4,0,0"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         CHART TITLE
+    ════════════════════════════════════════ -->
+    <Style x:Key="ChartTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontSize"   Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="#1E2A3A"/>
+        <Setter Property="Margin"     Value="0,0,0,10"/>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         MODERN TEXTBOX  (dark theme)
+    ════════════════════════════════════════ -->
+    <Style x:Key="ModernTextBox" TargetType="TextBox">
+        <Setter Property="Background"      Value="#2A2A3E"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderBrush"     Value="#3E3E5E"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height"          Value="40"/>
+        <Setter Property="Padding"         Value="10,0"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#E74C3C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         MODERN PASSWORDBOX  (dark theme)
+    ════════════════════════════════════════ -->
+    <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+        <Setter Property="Background"      Value="#2A2A3E"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderBrush"     Value="#3E3E5E"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height"          Value="40"/>
+        <Setter Property="Padding"         Value="10,0"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════
+         PRIMARY BUTTON  (red)
+    ════════════════════════════════════════ -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Background"      Value="#E74C3C"/>
+        <Setter Property="Foreground"      Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height"          Value="42"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="FontWeight"      Value="Bold"/>
+        <Setter Property="Cursor"          Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#C0392B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

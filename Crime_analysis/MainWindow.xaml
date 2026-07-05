@@ -1,0 +1,557 @@
+﻿<Window x:Class="Crime_analysis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        Title="Crime Analysis System"
+        Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="#1E1E2E">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- SIDEBAR -->
+        <Border Grid.Column="0" Background="#12121E">
+            <StackPanel>
+
+                <!-- Logo Area -->
+                <Border Background="#E74C3C" Padding="20,25">
+                    <StackPanel>
+                        <TextBlock Text="🔍" FontSize="30"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="CRIME ANALYSIS"
+                                   FontSize="13" FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0"/>
+                        <TextBlock Text="SYSTEM"
+                                   FontSize="13" FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- User Info -->
+                <Border Background="#1A1A2E" Padding="15,12">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="#E74C3C"
+                                CornerRadius="20"
+                                Width="36" Height="36">
+                            <TextBlock Text="👤" FontSize="16"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="10,0,0,0"
+                                    VerticalAlignment="Center">
+                            <TextBlock x:Name="txtUserName"
+                                       Text="Administrator"
+                                       FontSize="12" FontWeight="SemiBold"
+                                       Foreground="White"/>
+                            <TextBlock x:Name="txtUserRole"
+                                       Text="Admin"
+                                       FontSize="10"
+                                       Foreground="#E74C3C"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Rectangle Height="1" Fill="#2A2A3E"
+                           Margin="0,5,0,10"/>
+
+                <!-- Nav Buttons -->
+                <TextBlock Text="MAIN MENU"
+                           FontSize="10" Foreground="#666680"
+                           Margin="20,0,0,8" FontWeight="SemiBold"/>
+
+                <Button x:Name="btnDashboard"
+                        Content="📊   Dashboard"
+                        Style="{StaticResource NavButton}"
+                        Click="btnDashboard_Click"/>
+
+                <Button x:Name="btnCrimes"
+                        Content="🚨   Crimes"
+                        Style="{StaticResource NavButton}"
+                        Click="btnCrimes_Click"/>
+
+                <Button x:Name="btnSuspects"
+                        Content="👥   Suspects"
+                        Style="{StaticResource NavButton}"
+                        Click="btnSuspects_Click"/>
+
+                <Button x:Name="btnOfficers"
+                        Content="👮   Officers"
+                        Style="{StaticResource NavButton}"
+                        Click="btnOfficers_Click"/>
+
+                <Button x:Name="btnAreas"
+                        Content="📍   Areas"
+                        Style="{StaticResource NavButton}"
+                        Click="btnAreas_Click"/>
+
+                <Rectangle Height="1" Fill="#2A2A3E"
+                           Margin="0,10,0,10"/>
+
+                <TextBlock Text="SYSTEM"
+                           FontSize="10" Foreground="#666680"
+                           Margin="20,0,0,8" FontWeight="SemiBold"/>
+
+                <Button x:Name="btnReports"
+                        Content="📄   Reports"
+                        Style="{StaticResource NavButton}"
+                        Click="btnReports_Click"/>
+
+                <Button Content="🚪   Logout"
+                        Style="{StaticResource NavButton}"
+                        Click="btnLogout_Click"/>
+
+            </StackPanel>
+        </Border>
+
+        <!-- MAIN CONTENT -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- TOP BAR -->
+            <Border Grid.Row="0" Background="#12121E"
+                    BorderBrush="#2A2A3E" BorderThickness="0,0,0,1">
+                <Grid Margin="25,0">
+                    <TextBlock x:Name="txtPageTitle"
+                               Text="Dashboard"
+                               FontSize="18" FontWeight="Bold"
+                               Foreground="White"
+                               VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txtDateTime"
+                               FontSize="11" Foreground="#AAAAAA"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- PAGE CONTENT AREA -->
+            <Border Grid.Row="1" Background="#1E1E2E" Padding="25">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+
+                        <!-- ── DASHBOARD PANEL ── -->
+                        <StackPanel x:Name="DashboardPanel"
+                                    Visibility="Visible">
+
+                            <!-- Stat Cards -->
+                            <Grid Margin="0,0,0,25">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Card 1 — Total Crimes -->
+                                <Border Grid.Column="0"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Margin="0,0,12,0"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="🚨" FontSize="28"/>
+                                        <TextBlock Text="Total Crimes"
+                                                   FontSize="11"
+                                                   Foreground="#AAAAAA"
+                                                   Margin="0,8,0,4"/>
+                                        <TextBlock x:Name="txtTotalCrimes"
+                                                   Text="0"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"/>
+                                        <TextBlock x:Name="txtCrimeChange"
+                                                   Text="All recorded cases"
+                                                   FontSize="10"
+                                                   Foreground="#E74C3C"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Card 2 — Cases Solved -->
+                                <Border Grid.Column="1"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Margin="0,0,12,0"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="✅" FontSize="28"/>
+                                        <TextBlock Text="Cases Solved"
+                                                   FontSize="11"
+                                                   Foreground="#AAAAAA"
+                                                   Margin="0,8,0,4"/>
+                                        <TextBlock x:Name="txtSolved"
+                                                   Text="0"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"/>
+                                        <TextBlock Text="Status: Closed"
+                                                   FontSize="10"
+                                                   Foreground="#2ECC71"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Card 3 — Suspects -->
+                                <Border Grid.Column="2"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Margin="0,0,12,0"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="👥" FontSize="28"/>
+                                        <TextBlock Text="Suspects"
+                                                   FontSize="11"
+                                                   Foreground="#AAAAAA"
+                                                   Margin="0,8,0,4"/>
+                                        <TextBlock x:Name="txtSuspects"
+                                                   Text="0"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"/>
+                                        <TextBlock Text="Total recorded"
+                                                   FontSize="10"
+                                                   Foreground="#AAAAAA"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Card 4 — Officers -->
+                                <Border Grid.Column="3"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="👮" FontSize="28"/>
+                                        <TextBlock Text="Officers"
+                                                   FontSize="11"
+                                                   Foreground="#AAAAAA"
+                                                   Margin="0,8,0,4"/>
+                                        <TextBlock x:Name="txtOfficers"
+                                                   Text="0"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"/>
+                                        <TextBlock Text="Active on duty"
+                                                   FontSize="10"
+                                                   Foreground="#2ECC71"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <!-- Alert Banner -->
+                            <Border x:Name="AlertBanner"
+                                    Background="#3E1E1E"
+                                    BorderBrush="#E74C3C"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="14,10"
+                                    Margin="0,0,0,20">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚠"
+                                               FontSize="14"
+                                               Foreground="#E74C3C"
+                                               Margin="0,0,10,0"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="AlertText"
+                                               Text="Loading alerts..."
+                                               Foreground="#FF8A8A"
+                                               FontSize="12"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Filters -->
+                            <Border Background="#12121E"
+                                    CornerRadius="10"
+                                    Padding="16"
+                                    Margin="0,0,0,20">
+                                <StackPanel>
+                                    <TextBlock Text="FILTERS"
+                                               Foreground="#666680"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"
+                                               Margin="0,0,0,10"/>
+                                    <WrapPanel>
+                                        <StackPanel Margin="0,0,12,0">
+                                            <TextBlock Text="City"
+                                                       Foreground="#AAAAAA"
+                                                       FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <ComboBox x:Name="CityFilter"
+                                                      Width="130"
+                                                      Style="{StaticResource DarkComboStyle}">
+                                                <ComboBoxItem Content="All" IsSelected="True"/>
+                                                <ComboBoxItem Content="Abbottabad"/>
+                                                <ComboBoxItem Content="Haripur"/>
+                                                <ComboBoxItem Content="Mansehra"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,12,0">
+                                            <TextBlock Text="Crime Type"
+                                                       Foreground="#AAAAAA"
+                                                       FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <ComboBox x:Name="TypeFilter"
+                                                      Width="130"
+                                                      Style="{StaticResource DarkComboStyle}">
+                                                <ComboBoxItem Content="All" IsSelected="True"/>
+                                                <ComboBoxItem Content="Robbery"/>
+                                                <ComboBoxItem Content="Assault"/>
+                                                <ComboBoxItem Content="Burglary"/>
+                                                <ComboBoxItem Content="Car Theft"/>
+                                                <ComboBoxItem Content="Fraud"/>
+                                                <ComboBoxItem Content="Kidnapping"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,12,0">
+                                            <TextBlock Text="Severity"
+                                                       Foreground="#AAAAAA"
+                                                       FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <ComboBox x:Name="SeverityFilter"
+                                                      Width="110"
+                                                      Style="{StaticResource DarkComboStyle}">
+                                                <ComboBoxItem Content="All" IsSelected="True"/>
+                                                <ComboBoxItem Content="High"/>
+                                                <ComboBoxItem Content="Medium"/>
+                                                <ComboBoxItem Content="Low"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,12,0">
+                                            <TextBlock Text="From Date"
+                                                       Foreground="#AAAAAA"
+                                                       FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <DatePicker x:Name="FromDate"
+                                                        Width="130"
+                                                        Style="{StaticResource DarkDateStyle}"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,12,0">
+                                            <TextBlock Text="To Date"
+                                                       Foreground="#AAAAAA"
+                                                       FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <DatePicker x:Name="ToDate"
+                                                        Width="130"
+                                                        Style="{StaticResource DarkDateStyle}"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,0,8,0">
+                                            <TextBlock Text=" " FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <Button Content="Apply"
+                                                    Width="80" Height="32"
+                                                    Style="{StaticResource PrimaryButton}"
+                                                    Click="ApplyFilters_Click"/>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock Text=" " FontSize="10"
+                                                       Margin="0,0,0,4"/>
+                                            <Button Content="Export PDF"
+                                                    Width="90" Height="32"
+                                                    Background="#27AE60"
+                                                    Foreground="White"
+                                                    BorderThickness="0"
+                                                    Cursor="Hand"
+                                                    Click="ExportPdf_Click">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}"
+                                                                CornerRadius="6">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                              VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Charts Row -->
+                            <Grid Margin="0,0,0,20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Bar Chart -->
+                                <Border Grid.Column="0"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Margin="0,0,12,0"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="Crimes by Area"
+                                                   FontSize="14"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   Margin="0,0,0,15"/>
+                                        <lvc:CartesianChart
+                                            x:Name="BarChart"
+                                            Height="220"
+                                            Series="{Binding BarSeries}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Pie Chart -->
+                                <Border Grid.Column="1"
+                                        Background="#12121E"
+                                        CornerRadius="10"
+                                        Padding="20">
+                                    <StackPanel>
+                                        <TextBlock Text="Crime Type Breakdown"
+                                                   FontSize="14"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="White"
+                                                   Margin="0,0,0,15"/>
+                                        <lvc:PieChart
+                                            x:Name="PieChart"
+                                            Height="220"
+                                            Series="{Binding PieSeries}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <!-- Line Chart -->
+                            <Border Background="#12121E"
+                                    CornerRadius="10"
+                                    Padding="20"
+                                    Margin="0,0,0,20">
+                                <StackPanel>
+                                    <TextBlock Text="Monthly Crime Trend"
+                                               FontSize="14"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               Margin="0,0,0,15"/>
+                                    <lvc:CartesianChart
+                                        x:Name="LineChart"
+                                        Height="200"
+                                        Series="{Binding LineSeries}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Alerts Table -->
+                            <Border Background="#12121E"
+                                    CornerRadius="10"
+                                    Padding="20">
+                                <StackPanel>
+                                    <TextBlock Text="⚠  High Risk Area Alerts"
+                                               FontSize="14"
+                                               FontWeight="SemiBold"
+                                               Foreground="White"
+                                               Margin="0,0,0,15"/>
+                                    <DataGrid x:Name="AlertsGrid"
+                                              AutoGenerateColumns="False"
+                                              IsReadOnly="True"
+                                              Background="#12121E"
+                                              Foreground="White"
+                                              BorderThickness="0"
+                                              GridLinesVisibility="Horizontal"
+                                              HorizontalGridLinesBrush="#2A2A3E"
+                                              RowBackground="#12121E"
+                                              AlternatingRowBackground="#1A1A2E"
+                                              HeadersVisibility="Column"
+                                              CanUserResizeRows="False"
+                                              FontSize="12">
+                                        <DataGrid.ColumnHeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="Background" Value="#0A0A1A"/>
+                                                <Setter Property="Foreground" Value="#AAAAAA"/>
+                                                <Setter Property="Padding"    Value="10,8"/>
+                                                <Setter Property="FontSize"   Value="11"/>
+                                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                            </Style>
+                                        </DataGrid.ColumnHeaderStyle>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Area"
+                                                                Binding="{Binding AreaName}"
+                                                                Width="*"/>
+                                            <DataGridTextColumn Header="City"
+                                                                Binding="{Binding City}"
+                                                                Width="*"/>
+                                            <DataGridTextColumn Header="Crime Count"
+                                                                Binding="{Binding CrimeCount}"
+                                                                Width="*"/>
+                                            <DataGridTextColumn Header="Top Crime"
+                                                                Binding="{Binding TopCrime}"
+                                                                Width="*"/>
+                                            <DataGridTextColumn Header="Severity"
+                                                                Binding="{Binding Severity}"
+                                                                Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+
+                        <!-- ── CRIMES PANEL ── -->
+                        <StackPanel x:Name="CrimesPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Crimes Management"
+                                       Foreground="White"
+                                       FontSize="18" FontWeight="Bold"
+                                       Margin="0,0,0,16"/>
+                            <TextBlock Text="Coming next step..."
+                                       Foreground="#AAAAAA" FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- ── SUSPECTS PANEL ── -->
+                        <StackPanel x:Name="SuspectsPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Suspects Management"
+                                       Foreground="White"
+                                       FontSize="18" FontWeight="Bold"
+                                       Margin="0,0,0,16"/>
+                            <TextBlock Text="Coming next step..."
+                                       Foreground="#AAAAAA" FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- ── OFFICERS PANEL ── -->
+                        <StackPanel x:Name="OfficersPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Officers Management"
+                                       Foreground="White"
+                                       FontSize="18" FontWeight="Bold"
+                                       Margin="0,0,0,16"/>
+                            <TextBlock Text="Coming next step..."
+                                       Foreground="#AAAAAA" FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- ── AREAS PANEL ── -->
+                        <StackPanel x:Name="AreasPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Areas Management"
+                                       Foreground="White"
+                                       FontSize="18" FontWeight="Bold"
+                                       Margin="0,0,0,16"/>
+                            <TextBlock Text="Coming next step..."
+                                       Foreground="#AAAAAA" FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- ── REPORTS PANEL ── -->
+                        <StackPanel x:Name="ReportsPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Reports"
+                                       Foreground="White"
+                                       FontSize="18" FontWeight="Bold"
+                                       Margin="0,0,0,16"/>
+                            <TextBlock Text="Coming next step..."
+                                       Foreground="#AAAAAA" FontSize="14"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
