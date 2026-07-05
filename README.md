@@ -211,6 +211,7 @@ Install-Package PdfSharp
 | **Admin** | `admin` | `admin123` | Full access (view + add + edit + delete) |
 | **User** | `user1` | `user123` | Read only (view and filter only) |
 | **User** | `user2` | `user123` | Read only (view and filter only) |
+| **User** | `Hanzi` | `Hanzi01` | Read only (view and filter only) |
 
 > 💡 You can also register a new account from the login screen. New accounts are always created as **User** role.
 
@@ -259,7 +260,7 @@ Crime_analysis/
 
 The database script inserts:
 
-- ✅ **3 users** (1 admin + 2 normal users)
+- ✅ **4 users** (1 admin + 3 normal users)
 - ✅ **9 areas** across Abbottabad, Haripur, and Mansehra
 - ✅ **6 crime types** (Robbery, Assault, Burglary, Car Theft, Fraud, Kidnapping)
 - ✅ **6 officers** with different ranks
@@ -272,8 +273,8 @@ The database script inserts:
 
 | Name | Roll Number | Role |
 |---|---|---|
-| [Member 1 Name] | [Roll Number] | Developer |
-| [Member 2 Name] | [Roll Number] | Developer |
+| [Hanzalla Rafaq] | Developer |
+| [Ahmwd Raza] | Developer |
 
 ---
 
@@ -282,7 +283,6 @@ The database script inserts:
 ```
 Course    : Advanced Programming (C# .NET – Visual Studio)
 Project   : Data-Driven Desktop Application
-Institute : [Your University Name]
 Date      : June 2026
 ```
 
