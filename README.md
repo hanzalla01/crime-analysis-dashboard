@@ -17,16 +17,16 @@
     <td align="center"><b>Main Dashboard</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/login.png" width="400"/></td>
-    <td><img src="screenshots/dashboard.png" width="400"/></td>
+    <td><img src="Screenshots/login.png" width="400"/></td>
+    <td><img src="Screenshots/dashboard.png" width="400"/></td>
   </tr>
   <tr>
     <td align="center"><b>Crimes Management</b></td>
     <td align="center"><b>PDF Export</b></td>
   </tr>
   <tr>
-    <td><img src="screenshots/crimes.png" width="400"/></td>
-    <td><img src="screenshots/pdf.png" width="400"/></td>
+    <td><img src="Screenshots/crimes.png" width="400"/></td>
+    <td><img src="Screenshots/pdf.png" width="400"/></td>
   </tr>
 </table>
 
